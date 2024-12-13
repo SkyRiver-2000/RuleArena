@@ -1,5 +1,5 @@
 # RuleArena
-RuleArena: A Benchmark for Rule-Guided Reasoning with LLMs in Real-World Scenarios
+[RuleArena: A Benchmark for Rule-Guided Reasoning with LLMs in Real-World Scenarios](https://arxiv.org/abs/2412.08972)
 
 Codes and data will be released around Dec 20. Thank you for your attention and patience.
 
