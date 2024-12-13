@@ -1,7 +1,7 @@
 # RuleArena
 [RuleArena: A Benchmark for Rule-Guided Reasoning with LLMs in Real-World Scenarios](https://arxiv.org/abs/2412.08972)
 
-Codes and data will be released around Dec 20. Thank you for your attention and patience.
+Codes and data will be released around Dec 20. Thank you for your interest and patience.
 
 Please kindly cite our paper and star this repo if you use TRAD and find it interesting/helpful for your work, we'd appreciate it! Feel free to contact [Ruiwen Zhou](skyriver@sjtu.edu.cn) or open an issue if you have any questions.
 
