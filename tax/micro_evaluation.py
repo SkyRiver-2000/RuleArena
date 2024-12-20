@@ -539,7 +539,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
         if structured_output.self_employment_deductible is None:
             structured_output.self_employment_deductible = 0
         
-    # Check Line 8 (Schedule 1 Line 10) - 额外收入
+    # Check Line 8 (Schedule 1 Line 10) - additional income
     computed_additional_income = (structured_output.taxable_state_refunds + 
                                     structured_output.alimony_income + 
                                     structured_output.net_profit + 
@@ -555,7 +555,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: additional income")
     
-    # Check Line 9 - 总收入
+    # Check Line 9 - total income
     computed_total_income = (structured_output.wage_tip_compensation_total + 
                             structured_output.taxable_interest +
                             structured_output.ordinary_dividends + 
@@ -571,7 +571,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: total income")
         
-    # Check Line 10 (Schedule 1 Line 26) - 调整额总计
+    # Check Line 10 (Schedule 1 Line 26) - total adjustment
     computed_total_adjustments = (structured_output.educator_expenses + 
                                       structured_output.hsa_deduction + 
                                       structured_output.self_employment_deductible + 
@@ -585,7 +585,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: total adjustments")
         
-    # Check Line 11 - 调整后总收入
+    # Check Line 11 - adjusted gross income (AGI)
     computed_agi = structured_output.total_income - structured_output.total_adjustments
     if np.isclose(structured_output.adjusted_gross_income, computed_agi):
         rule_app_stat.append("Correct: adjusted gross income")
@@ -594,7 +594,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: adjusted gross income")
         
-    # Check Line 12 - 标准扣除额或列举扣除额
+    # Check Line 12 - standard / itemized deduction
     if structured_output.itemized:
         computed_standard_or_itemized_deductions = itemized_deduction(structured_output)
         if np.isclose(structured_output.standard_or_itemized_deductions, standard_deduction(structured_output.filing_status, structured_output.age, structured_output.spouse_age, structured_output.blind, structured_output.spouse_blind)):
@@ -612,7 +612,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
         else:
             rule_app_stat.append("Error: standard deductions")
         
-    # Check Line 14 - 扣除额总计
+    # Check Line 14 - total deductions
     computed_total_deductions = structured_output.standard_or_itemized_deductions + structured_output.qualified_business_income
     if np.isclose(structured_output.total_deductions, computed_total_deductions):
         rule_app_stat.append("Correct: total deductions")
@@ -621,7 +621,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: total deductions")
         
-    # Check Line 15 - 应税收入
+    # Check Line 15 - taxable income
     computed_taxable_income = max(structured_output.adjusted_gross_income - structured_output.total_deductions, 0)
     if np.isclose(structured_output.computed_taxable_income, computed_taxable_income):
         rule_app_stat.append("Correct: taxable income")
@@ -630,7 +630,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: taxable income")
     
-    # Check Line 16 - 税额
+    # Check Line 16 - tax (with / without qualified dividends)
     if structured_output.qualified_dividends > 0: # or structured_output.capital_gains > 0:
         computed_taxes = qualified_dividends_and_capital_gain_tax_worksheet(structured_output)
         if np.isclose(structured_output.taxes, computed_taxes):
@@ -656,7 +656,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: schedule 2 total part i taxes")
     
-    # Check Line 17 - 替代性最低税
+    # Check Line 17 - Copy Schedule 2 Line 3
     copy_alternative_minimum_tax = structured_output.schedule_2_total_taxes
     if np.isclose(structured_output.copy_schedule_2_line_3, copy_alternative_minimum_tax):
         rule_app_stat.append("Correct: schedule 2 taxes copy")
@@ -665,7 +665,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: schedule 2 taxes copy")
     
-    # Check Line 18 - 累计税额
+    # Check Line 18
     computed_f1040_line_18 = structured_output.taxes + structured_output.copy_schedule_2_line_3
     if np.isclose(structured_output.f1040_line_18, computed_f1040_line_18):
         rule_app_stat.append("Correct: accumulated taxes")
@@ -674,7 +674,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: accumulated taxes")
         
-    # Check Line 19 & 28 - 儿童与亲属信用额
+    # Check Line 19 & 28 - CTC tax credit and additional child tax credit
     if structured_output.num_qualifying_children + structured_output.num_other_dependents > 0:
         computed_ctc_or_other_dependent_credit, computed_additional_child_tax_credit = compute_child_and_dependent_credits(structured_output)
         if np.isclose(structured_output.ctc_or_other_dependent_credit, computed_ctc_or_other_dependent_credit):
@@ -690,7 +690,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
         else:
             rule_app_stat.append("Error: additional child tax credit")
         
-    # Check Line 29 & Schedule 3 Line 3 - 教育信用额
+    # Check Line 29 & Schedule 3 Line 3 - education tax credits
     if structured_output.student_list is not None and len(structured_output.student_list) > 0:
         american_opportunity_credit, education_credits = compute_education_credits(structured_output)
         if np.isclose(structured_output.american_opportunity_credit, american_opportunity_credit):
@@ -726,7 +726,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: schedule 3 total credits copy")
         
-    # Check Line 21 - 累计信用额
+    # Check Line 21 - total credits
     computed_accumulated_credits = structured_output.copy_schedule_3_line_8 + structured_output.ctc_or_other_dependent_credit
     if np.isclose(structured_output.accumulated_credits, computed_accumulated_credits):
         rule_app_stat.append("Correct: accumulated credits computation")
@@ -735,7 +735,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: accumulated credits computation")
     
-    # Check Line 22 - 税后金额
+    # Check Line 22
     computed_taxes_after_credits = max(structured_output.f1040_line_18 - structured_output.accumulated_credits, 0)
     if np.isclose(structured_output.taxes_after_credits, computed_taxes_after_credits):
         rule_app_stat.append("Correct: taxes after credits computation")
@@ -744,7 +744,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: taxes after credits computation")
     
-    # Check Line 23 - 其他税额
+    # Check Line 23 - other taxes
     if structured_output.self_employment_tax is None:
         structured_output.self_employment_tax = 0
     computed_other_taxes = structured_output.other_additional_taxes + structured_output.self_employment_tax
@@ -762,7 +762,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: other additional taxes copy")
     
-    # Check Line 24 - 总税额
+    # Check Line 24 - total taxes
     computed_total_tax = structured_output.taxes_after_credits + structured_output.other_taxes
     if np.isclose(structured_output.total_tax, computed_total_tax):
         rule_app_stat.append("Correct: total tax computation")
@@ -771,7 +771,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: total tax computation")
     
-    # Check Line 32 - 其他支付和可退还信用额总计
+    # Check Line 32 - other payments
     computed_total_other_payments = (structured_output.earned_income_credit +
                                      structured_output.additional_child_tax_credit +
                                      structured_output.american_opportunity_credit +
@@ -783,7 +783,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: total other payments and refundable credits computation")
     
-    # Check Line 33 - 总支付
+    # Check Line 33 - total payments
     computed_total_payments = structured_output.federal_income_tax_withheld + 0 + structured_output.total_other_payments_and_refundable_credits
     if np.isclose(structured_output.total_payments, computed_total_payments):
         rule_app_stat.append("Correct: total payments computation")
@@ -792,7 +792,7 @@ def analyze_response(response: str, tax_payer: dict, tax_payer_pydantic: TaxPaye
     else:
         rule_app_stat.append("Error: total payments computation")
     
-    # Check Line 37 - 应缴税额
+    # Check Line 37 - taxes owed or overpaid (answer)
     computed_amount_owed_or_overpaid = structured_output.total_tax - structured_output.total_payments
     if np.isclose(structured_output.amount_owed_or_overpaid, computed_amount_owed_or_overpaid):
         rule_app_stat.append("Correct: amount owed or overpaid computation")
