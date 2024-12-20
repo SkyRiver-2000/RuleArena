@@ -9,9 +9,9 @@ RuleArena is a challenging benchmark to evaluate LLMs on rule-guided reasoning t
 * **NBA:** Determine whether one or more specified transactions (contract signing or trading) are allowed.
 * **Tax:** Calculate the income tax for one person or family given their financial information.
 
-<div style="text-align: center; padding-bottom: 10pt">
+<p align="center" style="adding-bottom: 10pt">
   <img src="assets/framework.png" width="80%"></img>
-</div>
+</p>
 
 LLMs are given a the task instruction, the reference rules in this scenario, and a user instance, and required to conduct reasoning and computation for the user input under the guidance of reference rules.
 
