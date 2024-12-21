@@ -69,7 +69,7 @@ python auto_test.py --llm claude-3-5-sonnet-20241022 --complexity 0 --use_exampl
 
 ## Citation
 
-Please consider citing our paper and giving us a star if you use RuleArena and find it interesting/helpful for your work, and we'd appreciate it! Feel free to contact [Ruiwen Zhou](skyriver@sjtu.edu.cn) or open an issue if you have any questions.
+Please consider citing our paper and giving us a star if you use RuleArena and find it interesting/helpful for your work, and we'd appreciate it! Feel free to contact [Ruiwen Zhou](mailto:skyriver@sjtu.edu.cn) or open an issue if you have any questions.
 
 ```
 @article{zhou2024rulearena,
