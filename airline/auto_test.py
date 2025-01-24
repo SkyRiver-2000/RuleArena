@@ -200,17 +200,18 @@ def eval_query(llm, question_prompt: str, info_dict: dict, query_idx: int, args)
     with open(rule_file, "r") as f:
         reference_rules = f.read()
     prompt = prompt_template.replace("$reference_rules", reference_rules)
+    prompt = prompt.replace("$question_prompt", question_prompt)
+    if args.use_example:
+        prompt = prompt.replace("$example_prompt", example)
+    else:
+        prompt = prompt.replace("$example_prompt", "")
     while True:
         try:
             error_cnt += 1
             acc, pred = False, None
             check_base_tables = load_checking_fee()
             fee, _ = compute_answer(**info_dict, check_base_tables=check_base_tables)
-            prompt = prompt_template.replace("$question_prompt", question_prompt)
-            if args.use_example:
-                prompt = prompt.replace("$example_prompt", example)
-            else:
-                prompt = prompt.replace("$example_prompt", "")
+            
             response = llm(args.llm, prompt)
             response = response.replace("**", "")
             
@@ -249,7 +250,7 @@ def eval_query(llm, question_prompt: str, info_dict: dict, query_idx: int, args)
 parser = argparse.ArgumentParser()
 parser.add_argument("--llm", type=str, choices=[
     "gpt-4o-2024-08-06", "claude-3-5-sonnet-20241022", "qwen2.5-72b-instruct",
-    "meta/llama-3.1-405b-instruct-maas", "meta/llama-3.1-70b-instruct-maas"
+    "meta/llama-3.1-405b-instruct-maas", "meta/llama-3.1-70b-instruct-maas", "o1-preview"
 ])
 parser.add_argument("--complexity", type=int, choices=[0, 1, 2], default=0) # Difficulty level
 parser.add_argument("--textual", action="store_true")                       # Whether to convert tabular rules into textual rules
@@ -303,9 +304,7 @@ if args.remake_data or not os.path.exists(problem_file):
             json.dump(x, f)
             f.write("\n")
 
-problems = load_problems(
-    complexity=args.complexity
-)
+problems = load_problems(complexity=args.complexity)
 
 total_acc, total = 0, args.start_idx
 rule_applications = []
