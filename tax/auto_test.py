@@ -207,7 +207,7 @@ def eval_query(llm, tax_payer: dict, tax_payer_pydantic: TaxPayer, args, query_i
 parser = argparse.ArgumentParser()
 parser.add_argument("--llm", type=str, choices=[
     "gpt-4o-2024-08-06", "claude-3-5-sonnet-20241022", "qwen2.5-72b-instruct",
-    "meta/llama-3.1-405b-instruct-maas", "meta/llama-3.1-70b-instruct-maas"
+    "meta/llama-3.1-405b-instruct-maas", "meta/llama-3.1-70b-instruct-maas", "o1-preview"
 ])
 parser.add_argument("--complexity", type=int, default=0, choices=[0, 1, 2]) # Difficulty level
 parser.add_argument("--use_example", action="store_true")                   # Whether to use 1-shot example
