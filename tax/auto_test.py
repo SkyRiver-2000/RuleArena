@@ -255,7 +255,7 @@ log_path = os.path.join(args.log_dir, log_path)
 os.makedirs(log_path, exist_ok=True)
 
 os.makedirs("synthesized_problems", exist_ok=True)
-problem_file = os.path.join("synthesized_problems", f"complexity_{args.complexity}.json")
+problem_file = os.path.join("synthesized_problems", f"comp_{args.complexity}.json")
 if args.remake_data or not os.path.exists(problem_file):
     problem_set = []
     for _ in range(100):
@@ -265,8 +265,6 @@ if args.remake_data or not os.path.exists(problem_file):
         json.dump(problem_set, f, indent=2)
 
 problems = load_problems(complexity=args.complexity)
-
-missed = [70]
 
 total_acc, total = 0, args.start_idx
 rule_applications = []

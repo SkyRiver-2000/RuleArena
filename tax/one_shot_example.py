@@ -1855,6 +1855,7 @@ The total tax owed is $15,781.68.
 
 example_dict = {
     "gpt-4o-2024-08-06": example_gpt,
+    "o1-preview": example_claude,
     "claude-3-5-sonnet-20241022": example_claude,
     "qwen2.5-72b-instruct": example_qwen,
     "meta/llama-3.1-405b-instruct-maas": example_llama,
