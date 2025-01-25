@@ -112,7 +112,7 @@ Summary of Baggage Fees:
   - Item 3: $150
   - Item 4: $200
   - Item 5: $200
-Total Baggage Fees: $200 (Item 2) + $150 (Item 3) + $200 (Item 4) + $200 (Item 5) = $800
+Total Baggage Fees: $200 (Item 2) + $150 (Item 3) + $200 (Item 4) + $200 (Item 5) = $750
 Total Cost:
 - Flight Ticket: $448
 - Total Baggage Fees: $750
