@@ -70,11 +70,11 @@ Fees for Each Checked Bag:
    - Checking Fee:
      - For the first checked bag, the checking fee is $0.
    - Oversize Fee:                                 
-     - For dimensions over 65 inches up to 115 inches between the U.S. and South America, the fee is $200.
+     - For dimensions over 65 inches up to 115 inches between the U.S. and South America, the fee is $150.
    - Overweight Fee:
      - For weights over 53 lbs up to 70 lbs, the fee is $100.
    - The higher of oversize and overweight fee should apply.
-   - Total Fee for Item 2: $0 (checking) + $200 (oversize) = $200
+   - Total Fee for Item 2: $0 (checking) + $150 (oversize) = $150
 2. Item 3 (Backpack):
    - Dimensions: 46 x 29 x 24 inches
      - Total dimensions: 46 + 29 + 24 = 99 inches
@@ -84,11 +84,11 @@ Fees for Each Checked Bag:
    - Checking Fee:
      - For the second checked bag, the checking fee is $0.
    - Oversize Fee:
-     - For dimensions over 65 inches up to 115 inches between the U.S. and South America, the fee is $200.
+     - For dimensions over 65 inches up to 115 inches between the U.S. and South America, the fee is $150.
    - Overweight Fee:
      - For weights over 70 lbs up to 100 lbs, the fee is $200.
    - The higher of oversize and overweight fee should apply.
-   - Total Fee for Item 3: $0 (checking) + $200 (either oversize or overweight) = $200
+   - Total Fee for Item 3: $0 (checking) + $200 (overweight) = $200
 3. Item 4 (Luggage box):
    - Dimensions: 35 x 12 x 11 inches
      - Total dimensions: 35 + 12 + 11 = 58 inches
@@ -109,14 +109,14 @@ Fees for Each Checked Bag:
    - Total Fee for Item 5: $200 (checking) + $0 (No overweight or oversize fees) = $200
 Summary of Baggage Fees:
   - Item 2: $200
-  - Item 3: $200
+  - Item 3: $150
   - Item 4: $200
   - Item 5: $200
-Total Baggage Fees: $200 (Item 2) + $200 (Item 3) + $200 (Item 4) + $200 (Item 5) = $800
+Total Baggage Fees: $200 (Item 2) + $150 (Item 3) + $200 (Item 4) + $200 (Item 5) = $800
 Total Cost:
 - Flight Ticket: $448
-- Total Baggage Fees: $800
-- The total cost is $1,248.
+- Total Baggage Fees: $750
+- The total cost is $1,198.
 </example>
 """
 

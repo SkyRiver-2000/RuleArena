@@ -115,7 +115,7 @@ def compute_oversize(bag: Dict[str, float], routine: str):
         return 0
     if np.sum(bag["size"]) > 62 and np.sum(bag["size"]) <= 65:
         return 30
-    if routine in ["Panama", "South America", "Europe", "Israel", "Qatar"]:
+    if routine in ["Panama", "South America", "Peru", "Colombia", "Ecuador", "Europe", "Israel", "Qatar"]:
         return 150
     return 200
 
