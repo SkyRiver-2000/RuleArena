@@ -65,22 +65,25 @@ def compute_check_cost(
     override: dict = {},
 ):
     if not "check_base" in override:
-        less_70_lbs, over_70_lbs = [], []
-        less_70_lbs_idx, over_70_lbs_idx = [], []
-        for i, bag in enumerate(bag_list):
-            if bag["weight"] <= 70:
-                less_70_lbs.append(bag)
-                less_70_lbs_idx.append(i)
-            else:
-                over_70_lbs.append(bag)
-                over_70_lbs_idx.append(i)
-        order = np.argsort([-bag["weight"] for bag in less_70_lbs])
-        full_order = [less_70_lbs_idx[i] for i in order] + over_70_lbs_idx
-        bag_list = [less_70_lbs[i] for i in order] + over_70_lbs
+        oversize_cost = [compute_oversize(b, routine) for b in bag_list]
+        overweight_cost_if_comp = [
+            compute_overweight(b, routine, customer_class, True) for b in bag_list
+        ]
+        
+        overweight_cost_if_not_comp = [
+            compute_overweight(b, routine, customer_class, False) for b in bag_list
+        ]
+        
+        violation_cost_if_comp = np.maximum(oversize_cost, overweight_cost_if_comp)
+        violation_cost_if_not_comp = np.maximum(oversize_cost, overweight_cost_if_not_comp)
+        
+        complementary_gain = violation_cost_if_not_comp - violation_cost_if_comp
+        order = np.argsort(-complementary_gain)
+        bag_list = [bag_list[i] for i in order]
         check_base = compute_base(bag_list, direction, routine, customer_class, check_base_tables)
     else:
         check_base = override["check_base"]
-        full_order = np.arange(len(bag_list))
+        order = np.arange(len(bag_list))
     
     complementary = [(x == 0) for x in check_base]
     oversize_cost = [compute_oversize(b, routine) for b in bag_list]
@@ -91,9 +94,9 @@ def compute_check_cost(
     violation_cost = np.maximum(oversize_cost, overweight_cost).sum()
     total_check_cost = np.sum(check_base) + violation_cost
     info_dict = {
-        "overweight": invert_order(overweight_cost, full_order),
-        "oversize": invert_order(oversize_cost, full_order),
-        "base": invert_order(check_base, full_order)
+        "overweight": invert_order(overweight_cost, order),
+        "oversize": invert_order(oversize_cost, order),
+        "base": invert_order(check_base, order)
     }
     return total_check_cost, info_dict
 
