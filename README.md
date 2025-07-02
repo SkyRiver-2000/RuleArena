@@ -1,6 +1,6 @@
-# RuleArena
+# RuleArena [ACL 2025]
 
-Dataset and code for paper "[RuleArena: A Benchmark for Rule-Guided Reasoning with LLMs in Real-World Scenarios](https://arxiv.org/abs/2412.08972)".
+Dataset and code for our ACL 2025 paper "[RuleArena: A Benchmark for Rule-Guided Reasoning with LLMs in Real-World Scenarios](https://arxiv.org/abs/2412.08972)".
 
 ## Introduction
 
@@ -72,10 +72,10 @@ python auto_test.py --llm claude-3-5-sonnet-20241022 --complexity 0 --use_exampl
 Please consider citing our paper and giving us a star if you use RuleArena and find it interesting/helpful for your work, and we'd appreciate it! Feel free to contact [Ruiwen Zhou](mailto:skyriver@sjtu.edu.cn) or open an issue if you have any questions.
 
 ```
-@article{zhou2024rulearena,
+@inproceedings{zhou2025rulearena,
   author={Ruiwen Zhou and Wenyue Hua and Liangming Pan and Sitao Cheng and Xiaobao Wu and En Yu and William Yang Wang},
   title={RuleArena: A Benchmark for Rule-Guided Reasoning with LLMs in Real-World Scenarios},
-  journal={arXiv preprint arXiv:2412.08972},
-  year={2024}
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics ({ACL})},
+  year={2025}
 }
 ```
