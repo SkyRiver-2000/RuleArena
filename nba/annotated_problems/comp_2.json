@@ -534,7 +534,7 @@
     {
         "n_teams": 4,
         "n_players": 6,
-        "n_operations": 4,
+        "n_operations": 5,
         "team_situations": [
             "Team A has a team salary of $183,000,000.",
             "Team B has a team salary of $156,000,000.",
@@ -886,7 +886,7 @@
         ]
     },
     {
-        "n_teams": 3,
+        "n_teams": 2,
         "n_players": 5,
         "n_operations": 3,
         "team_situations": [

@@ -216,8 +216,8 @@
     },
     {
         "n_teams": 2,
-        "n_players": 2,
-        "n_operations": 3,
+        "n_players": 3,
+        "n_operations": 2,
         "team_situations": [
             "Team A has a team salary of $170,000,000;",
             "Team B has a team salary of $120,000,000."
@@ -506,7 +506,7 @@
         ]
     },
     {
-        "n_teams": 1,
+        "n_teams": 2,
         "n_players": 3,
         "n_operations": 1,
         "team_situations": [
@@ -569,7 +569,7 @@
         ]
     },
     {
-        "n_teams": 1,
+        "n_teams": 2,
         "n_players": 4,
         "n_operations": 1,
         "team_situations": [
@@ -604,7 +604,7 @@
         ]
     },
     {
-        "n_teams": 1,
+        "n_teams": 2,
         "n_players": 3,
         "n_operations": 1,
         "team_situations": [
@@ -1222,7 +1222,7 @@
     {
         "n_teams": 2,
         "n_players": 2,
-        "n_operations": 3,
+        "n_operations": 4,
         "team_situations": [
             "Team A has a team salary of $128,000,000.",
             "Team B has a team salary of $162,000,000."
@@ -1300,7 +1300,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team B has a team salary of $120,000,000;",
@@ -1334,7 +1334,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team D has a team salary of $90,000,000;",
@@ -1369,7 +1369,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team D has a team salary of $90,000,000;",
@@ -1404,7 +1404,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team D has a team salary of $90,000,000;",
@@ -1439,7 +1439,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team C has a team salary of $86,000,000;",
@@ -1474,7 +1474,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team D has a team salary of $86,000,000;",
@@ -1509,7 +1509,7 @@
     {
         "n_teams": 3,
         "n_players": 3,
-        "n_operations": 1,
+        "n_operations": 3,
         "team_situations": [
             "Team A has a team salary of $100,000,000;",
             "Team D has a team salary of $86,000,000;",
@@ -1544,7 +1544,7 @@
     {
         "n_teams": 2,
         "n_players": 2,
-        "n_operations": 1,
+        "n_operations": 2,
         "team_situations": [
             "Team D has a team salary of $106,000,000;",
             "Team G has a team salary of $120,000,000."
@@ -1574,7 +1574,7 @@
     {
         "n_teams": 2,
         "n_players": 2,
-        "n_operations": 1,
+        "n_operations": 2,
         "team_situations": [
             "Team F has a team salary of $120,000,000;",
             "Team D has a team salary of $70,000,000."
@@ -1604,7 +1604,7 @@
     {
         "n_teams": 2,
         "n_players": 2,
-        "n_operations": 1,
+        "n_operations": 2,
         "team_situations": [
             "Team K has a team salary of $120,000,000;",
             "Team P has a team salary of $90,000,000."
@@ -1634,7 +1634,7 @@
     {
         "n_teams": 2,
         "n_players": 2,
-        "n_operations": 1,
+        "n_operations": 2,
         "team_situations": [
             "Team K has a team salary of $100,000,000;",
             "Team P has a team salary of $90,000,000."
@@ -1757,7 +1757,7 @@
     },
     {
         "n_teams": 2,
-        "n_players": 2,
+        "n_players": 1,
         "n_operations": 2,
         "team_situations": [
             "Team F has a team salary of $90,000,000;",
